@@ -1,0 +1,18 @@
+{
+    "name": "wesnick/drupal-bootstrap",
+    "description": "Lightweight wrapper to bootstrap Drupal in OO context to make native API calls.",
+    "authors": [
+        {
+            "name": "Wesley O. Nichols",
+            "email": "wesley.o.nichols@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}
