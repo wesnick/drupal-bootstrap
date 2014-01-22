@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Helper\HelperSet;
+
+(@include_once __DIR__ . '/../vendor/autoload.php') || @include_once __DIR__ . '/../../../autoload.php';
+
+$commands = array();
+
+$drupal = new \Wesnick\DrupalBootstrap\Drupal7(__DIR__ . '/../drupal/');
+$drupal->doBootstrap();
+
+
+$app = new \Symfony\Component\Console\Application("Drupal Bootstrap Console");
+$app->setHelperSet(new HelperSet(array(
+        new \Symfony\Component\Console\Helper\DialogHelper(),
+        new \Symfony\Component\Console\Helper\FormatterHelper(),
+    )
+));
+$app->addCommands(array(
+    new \Wesnick\DrupalBootstrap\Command\SiteBuilderCommand(),
+    new \Wesnick\DrupalBootstrap\Command\SiteReaderCommand(),
+));
+
+$app->run();

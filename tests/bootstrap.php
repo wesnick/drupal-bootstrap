@@ -11,3 +11,5 @@ if (!file_exists(__DIR__.'/../vendor/autoload.php')) {
 
 require_once __DIR__.'/../vendor/autoload.php';
 
+$drupal = new \Wesnick\DrupalBootstrap\Drupal7(__DIR__ . '/../drupal/');
+$drupal->doBootstrap();

@@ -6,24 +6,31 @@
 namespace Wesnick\DrupalBootstrap\Wrapper;
 
 
+use Wesnick\DrupalBootstrap\Definition\FieldBuilder;
+use Wesnick\DrupalBootstrap\Definition\InstanceBuilder;
+use Wesnick\DrupalBootstrap\Definition\NodeTypeBuilder;
+use Wesnick\DrupalBootstrap\Definition\WidgetBuilder;
 use Wesnick\DrupalBootstrap\Drupal7;
 
 class EntityWrapperTest extends \PHPUnit_Framework_TestCase
 {
 
-    private static $drupalGlobal = false;
-
     public function setUp()
     {
-        if ( ! self::$drupalGlobal) {
-            $drupal = new Drupal7('/home/wes/');
-            $drupal->doBootstrap();
-            self::$drupalGlobal = true;
-        }
     }
 
     public function testGetter()
     {
+
+        $widget_types = WidgetBuilder::getTypesForFieldType('image');
+        $widgetList = array_keys($widget_types);
+
+       $x = 'y';
+
+//        $builder = new NodeTypeBuilder('test', "Test Content Type");
+//        $builder->build();
+//
+//        $types = node_type_get_types();
 
     }
 

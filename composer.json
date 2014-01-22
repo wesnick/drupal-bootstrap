@@ -8,8 +8,15 @@
         }
     ],
     "require": {
-
+        "symfony/console": "2.4.x-dev",
+        "kzykhys/php-class-generator": "dev-imports"
     },
+    "repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/wesnick/php-class-generator.git"
+    }
+],
     "autoload": {
         "psr-0": {
             "": "src/"
