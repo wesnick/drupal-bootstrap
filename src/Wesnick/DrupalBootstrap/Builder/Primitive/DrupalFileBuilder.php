@@ -1,7 +1,6 @@
 <?php
 
-namespace Wesnick\DrupalBootstrap\Builder;
-use Wesnick\DrupalBootstrap\Writer\DrupalCodeWriter;
+namespace Wesnick\DrupalBootstrap\Builder\Primitive;
 
 
 /**

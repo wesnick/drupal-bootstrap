@@ -1,6 +1,6 @@
 <?php
 
-namespace Wesnick\DrupalBootstrap\Definition;
+namespace Wesnick\DrupalBootstrap\Builder\Field;
 
 
 /**
@@ -28,10 +28,6 @@ class WidgetBuilder
         return $return;
     }
 
-    /**
-     * @var string
-     */
-    protected $label;
 
     /**
      * @var array
@@ -40,10 +36,10 @@ class WidgetBuilder
 
     protected $type;
 
-    function __construct($type, $label, $settings = array())
+    function __construct($type, $settings = array())
     {
         $this->type = $type;
-        $this->label = $label;
+        $this->settings = $settings;
     }
 
 

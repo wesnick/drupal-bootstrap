@@ -1,6 +1,8 @@
 <?php
 
-namespace Wesnick\DrupalBootstrap\Builder;
+namespace Wesnick\DrupalBootstrap\Builder\Feature;
+use Wesnick\DrupalBootstrap\Builder\Primitive\DrupalFileBuilder;
+use Wesnick\DrupalBootstrap\Builder\Primitive\MethodBuilder;
 
 
 /**
@@ -8,7 +10,7 @@ namespace Wesnick\DrupalBootstrap\Builder;
  * 
  * @author Wesley O. Nichols <wesley.o.nichols@gmail.com>
  */
-class WidgetBuilder extends DrupalFileBuilder
+class CtoolsContentTypeBuilder extends DrupalFileBuilder
 {
 
     protected $replacements;

@@ -9,7 +9,8 @@
     ],
     "require": {
         "symfony/console": "2.4.x-dev",
-        "kzykhys/php-class-generator": "dev-imports"
+        "kzykhys/php-class-generator": "dev-imports",
+        "symfony/yaml": "2.4.x-dev"
     },
     "repositories": [
     {

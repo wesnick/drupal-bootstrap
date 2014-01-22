@@ -3,7 +3,7 @@
  * @file MethodBuilder.php
  */
 
-namespace Wesnick\DrupalBootstrap\Builder;
+namespace Wesnick\DrupalBootstrap\Builder\Primitive;
 
 /**
  * Represents a method

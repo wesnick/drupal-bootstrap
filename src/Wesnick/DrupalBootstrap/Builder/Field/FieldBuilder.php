@@ -1,6 +1,6 @@
 <?php
 
-namespace Wesnick\DrupalBootstrap\Definition;
+namespace Wesnick\DrupalBootstrap\Builder\Field;
 
 
 /**
@@ -19,6 +19,22 @@ class FieldBuilder
     {
         $this->name = $name;
         $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     public static function getFieldTypes($type = null)

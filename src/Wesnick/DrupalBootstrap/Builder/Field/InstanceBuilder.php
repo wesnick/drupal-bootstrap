@@ -1,6 +1,6 @@
 <?php
 
-namespace Wesnick\DrupalBootstrap\Definition;
+namespace Wesnick\DrupalBootstrap\Builder\Field;
 
 
 /**
@@ -22,7 +22,7 @@ class InstanceBuilder
     protected $widget;
     protected $display;
 
-    function __construct($field_name, $label, $widgetDefinition)
+    function __construct($field_name, $label, WidgetBuilder $widgetDefinition)
     {
         $this->field_name = $field_name;
         $this->label = $label;
@@ -54,7 +54,7 @@ class InstanceBuilder
     }
 
     /**
-     * @param \Wesnick\DrupalBootstrap\Definition\WidgetBuilder $widget
+     * @param WidgetBuilder $widget
      */
     public function setWidget($widget)
     {
@@ -100,4 +100,54 @@ class InstanceBuilder
             ));
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFieldName()
+    {
+        return $this->field_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getRequired()
+    {
+        return $this->required;
+    }
+
+    /**
+     * @return \Wesnick\DrupalBootstrap\Definition\WidgetBuilder
+     */
+    public function getWidget()
+    {
+        return $this->widget;
+    }
+
+
 }

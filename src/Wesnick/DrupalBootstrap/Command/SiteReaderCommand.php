@@ -1,18 +1,15 @@
 <?php
 
 namespace Wesnick\DrupalBootstrap\Command;
-use KzykHys\ClassGenerator\Builder\ClassBuilder;
-use KzykHys\ClassGenerator\Builder\PropertyBuilder;
-use KzykHys\ClassGenerator\Compiler\Compiler;
+
+
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wesnick\DrupalBootstrap\Definition\FieldBuilder;
-use Wesnick\DrupalBootstrap\Definition\InstanceBuilder;
-use Wesnick\DrupalBootstrap\Definition\WidgetBuilder;
-use Wesnick\DrupalBootstrap\Writer\DrupalCodeCompiler;
-use Wesnick\DrupalBootstrap\Writer\DrupalCodeWriter;
+use Symfony\Component\Yaml\Yaml;
+use Wesnick\DrupalBootstrap\Builder\SiteBuilder;
 
 
 /**
@@ -22,6 +19,7 @@ use Wesnick\DrupalBootstrap\Writer\DrupalCodeWriter;
  */
 class SiteReaderCommand extends Command
 {
+
     /**
      * @var DialogHelper
      */
@@ -34,40 +32,41 @@ class SiteReaderCommand extends Command
 
     protected function configure()
     {
-        return $this->setName('dr:read');
+        return $this
+            ->setName('dr:read')
+            ->addArgument(
+                'target', InputArgument::REQUIRED,
+                '/path/to/your/drupal',
+                null
+            )
+            ->addArgument(
+                'output', InputArgument::OPTIONAL,
+                'output destination for site definition yaml file',
+                null
+            )
+            ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
+        $this->dialog = $this->getHelper('dialog');
         $this->output = $output;
-        $info = entity_get_info();
 
-        foreach ($info as $type => $def) {
+        $path = $input->getArgument('target');
+        $drupal = $this->getHelper('drupal-bootstrap');
+        $drupal->boot($path);
+        $builder = new SiteBuilder();
+        $builder->readSiteProperties();
 
-            $subinfo = entity_get_all_property_info($type);
-            $compiler = new Compiler();
-            $class = new ClassBuilder();
-            $class->setClass($def['base table']);
-            $class->setDocblock(array($def['label']));
-            foreach ($subinfo as $name => $sinfo) {
-                $property = new PropertyBuilder();
-                $property->setName($name);
-                $var_type = isset($def['type']) ? $def['type'] : 'string';
-                $property->setType($var_type);
-                $property->setComments($def['description']);
-                $property->setVisibility('protected');
-                $property->addAccessor('get');
-                $property->addAccessor('set');
-                $class->addProperty($property);
-            }
-
-            $writer = $compiler->compile($class);
-            $writer->save('/home/wes/www/drupal-bootstrap/bin/test/' . $class->getClass() . '.php');
-
+        if ($file = $input->getArgument('output')) {
+            $builder->dumpToYamlFile($file);
+        } else {
+            $output->writeln("no export so dumping to console...");
         }
 
         return 0;
     }
+
 
 }

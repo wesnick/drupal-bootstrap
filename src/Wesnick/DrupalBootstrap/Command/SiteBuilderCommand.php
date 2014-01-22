@@ -3,11 +3,14 @@
 namespace Wesnick\DrupalBootstrap\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wesnick\DrupalBootstrap\Definition\FieldBuilder;
-use Wesnick\DrupalBootstrap\Definition\InstanceBuilder;
-use Wesnick\DrupalBootstrap\Definition\WidgetBuilder;
+use Symfony\Component\Yaml\Yaml;
+use Wesnick\DrupalBootstrap\Builder\Field\FieldBuilder;
+use Wesnick\DrupalBootstrap\Builder\Field\InstanceBuilder;
+use Wesnick\DrupalBootstrap\Builder\Field\WidgetBuilder;
+use Wesnick\DrupalBootstrap\Builder\SiteBuilder;
 
 
 /**
@@ -29,18 +32,43 @@ class SiteBuilderCommand extends Command
 
     protected function configure()
     {
-        return $this->setName('dr:build');
+        return $this
+            ->setName('dr:build')
+            ->addArgument(
+                'target', InputArgument::REQUIRED,
+                '/path/to/your/drupal',
+                null
+            )
+            ->addArgument(
+                'import', InputArgument::OPTIONAL,
+                'your site definition yaml file',
+                null
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->dialog = $this->getHelperSet()->get('dialog');
+        $this->dialog = $this->getHelper('dialog');
         $this->output = $output;
 
-        $this->mainQuestion();
+        $path = $input->getArgument('target');
+        $drupal = $this->getHelper('drupal-bootstrap');
+        $drupal->boot($path);
+
+        if ($file = $input->getArgument('import')) {
+            $builder = new SiteBuilder();
+            $builder->importFromYamlFile($file);
+
+        } else {
+            // run interactive
+            $this->mainQuestion();
+        }
 
         return 0;
     }
+
+
 
     protected function mainQuestion()
     {

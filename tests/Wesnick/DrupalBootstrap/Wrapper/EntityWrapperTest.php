@@ -22,8 +22,13 @@ class EntityWrapperTest extends \PHPUnit_Framework_TestCase
     public function testGetter()
     {
 
-        $widget_types = WidgetBuilder::getTypesForFieldType('image');
-        $widgetList = array_keys($widget_types);
+
+
+
+//        $widgets[$info['type']] = WidgetBuilder::getTypesForFieldType($info['type']);
+
+
+//        $widgetList = array_keys($widget_types);
 
        $x = 'y';
 

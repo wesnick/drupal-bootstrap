@@ -7,14 +7,12 @@ use Symfony\Component\Console\Helper\HelperSet;
 
 $commands = array();
 
-$drupal = new \Wesnick\DrupalBootstrap\Drupal7(__DIR__ . '/../drupal/');
-$drupal->doBootstrap();
-
-
 $app = new \Symfony\Component\Console\Application("Drupal Bootstrap Console");
 $app->setHelperSet(new HelperSet(array(
         new \Symfony\Component\Console\Helper\DialogHelper(),
         new \Symfony\Component\Console\Helper\FormatterHelper(),
+        new \Symfony\Component\Console\Helper\TableHelper(),
+        new \Wesnick\DrupalBootstrap\Console\DrupalBootstrapHelper(),
     )
 ));
 $app->addCommands(array(

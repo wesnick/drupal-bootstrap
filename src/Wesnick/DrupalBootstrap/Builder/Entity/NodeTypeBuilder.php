@@ -1,6 +1,6 @@
 <?php
 
-namespace Wesnick\DrupalBootstrap\Definition;
+namespace Wesnick\DrupalBootstrap\Builder\Entity;
 
 
 /**
@@ -8,14 +8,12 @@ namespace Wesnick\DrupalBootstrap\Definition;
  * 
  * @author Wesley O. Nichols <wesley.o.nichols@gmail.com>
  */
-class NodeTypeBuilder
+class NodeTypeBuilder extends AbstractEntityTypeBuilder
 {
 
-    protected $type;
-    protected $name;
+
     protected $base = 'node_content';
     protected $module = 'node';
-    protected $description = "Node Type Description";
     protected $help = "";
     protected $has_title = true;
     protected $title_label = "Title";
@@ -26,18 +24,28 @@ class NodeTypeBuilder
     protected $orig_type = '';
     protected $disabled_changed = false;
 
-    function __construct($type, $name)
-    {
-        $this->type = $type;
-        $this->name = $name;
-    }
 
+    public function getEntityType()
+    {
+        return 'node';
+    }
 
     public function build()
     {
+        $vars = get_object_vars($this);
+        $vars['type'] = $vars['bundle'];
+        $vars['name'] = $vars['label'];
+        unset($vars['bundle']);
+        unset($vars['label']);
+
         node_type_save(
-            (object) get_object_vars($this)
+            (object) $vars
         );
+    }
+
+    public static function getTypes()
+    {
+        return node_type_get_types();
     }
 
 
