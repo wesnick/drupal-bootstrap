@@ -43,4 +43,9 @@ interface CoreInterface {
      */
     public function validateDrupalSite();
 
+    /**
+     * @return array
+     */
+    public function getPDO();
+
 }

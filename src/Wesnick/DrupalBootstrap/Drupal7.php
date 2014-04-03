@@ -128,4 +128,17 @@ class Drupal7 implements CoreInterface
     }
 
 
+    /**
+     * @return \PDO
+     */
+    public function getPDO()
+    {
+        $conf_file = $this->drupalRoot . "/sites/default/settings.php";
+        $databases = array();
+        include_once $conf_file;
+        $default = $databases['default']['default'];
+        return new \PDO(sprintf('mysql:dbname=%s;host=%s', $default['database'], $default['host']), $default['username'], $default['password']);
+    }
+
+
 }

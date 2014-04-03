@@ -2,6 +2,7 @@
 
 namespace Wesnick\DrupalBootstrap\Console;
 use Symfony\Component\Console\Helper\Helper;
+use Wesnick\DrupalBootstrap\CoreInterface;
 use Wesnick\DrupalBootstrap\Drupal6;
 use Wesnick\DrupalBootstrap\Drupal7;
 
@@ -13,6 +14,12 @@ use Wesnick\DrupalBootstrap\Drupal7;
  */
 class DrupalBootstrapHelper extends Helper
 {
+
+    /**
+     * @var CoreInterface
+     */
+    private $drupal;
+
     /**
      * Returns the canonical name of this helper.
      *
@@ -44,8 +51,8 @@ class DrupalBootstrapHelper extends Helper
      */
     public function boot7($path, $uri = 'default')
     {
-        $drupal = new Drupal7($path, $uri);
-        $drupal->doBootstrap();
+        $this->drupal = new Drupal7($path, $uri);
+        $this->drupal->doBootstrap();
     }
 
     /**
@@ -53,8 +60,19 @@ class DrupalBootstrapHelper extends Helper
      */
     public function boot6($path, $uri = 'default')
     {
-        $drupal = new Drupal6($path, $uri);
-        $drupal->doBootstrap();
+        $this->drupal = new Drupal6($path, $uri);
+        $this->drupal->doBootstrap();
     }
 
+    public function getPDO($path, $version = 7)
+    {
+
+        if ($version == 7) {
+            $drupal = new Drupal7($path);
+        } else {
+            $drupal = new Drupal6($path);
+        }
+
+        return $drupal->getPDO();
+    }
 } 
