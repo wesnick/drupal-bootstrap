@@ -59,6 +59,7 @@ class SiteBuilderCommand extends Command
         if ($file = $input->getArgument('import')) {
             $builder = new SiteBuilder();
             $builder->importFromYamlFile($file);
+            $builder->buildFromDefinition();
 
         } else {
             // run interactive

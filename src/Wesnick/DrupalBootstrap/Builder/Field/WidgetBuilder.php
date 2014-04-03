@@ -51,6 +51,22 @@ class WidgetBuilder
 
     }
 
+    /**
+     * @return array
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
 
 
 } 

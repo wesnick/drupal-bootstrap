@@ -2,6 +2,7 @@
 
 namespace Wesnick\DrupalBootstrap\Console;
 use Symfony\Component\Console\Helper\Helper;
+use Wesnick\DrupalBootstrap\Drupal6;
 use Wesnick\DrupalBootstrap\Drupal7;
 
 
@@ -27,11 +28,33 @@ class DrupalBootstrapHelper extends Helper
     /**
      * Boot Drupal
      */
-    public function boot($path, $uri = 'default')
+    public function boot($path, $version = 7, $uri = 'default')
+    {
+        if ($version == 7) {
+            $drupal = new Drupal7($path, $uri);
+        } else {
+            $drupal = new Drupal6($path, $uri);
+        }
+
+        $drupal->doBootstrap();
+    }
+
+    /**
+     * Boot Drupal
+     */
+    public function boot7($path, $uri = 'default')
     {
         $drupal = new Drupal7($path, $uri);
         $drupal->doBootstrap();
     }
 
+    /**
+     * Boot Drupal
+     */
+    public function boot6($path, $uri = 'default')
+    {
+        $drupal = new Drupal6($path, $uri);
+        $drupal->doBootstrap();
+    }
 
 } 

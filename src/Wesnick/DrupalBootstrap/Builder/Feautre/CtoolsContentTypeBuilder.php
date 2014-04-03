@@ -2,7 +2,7 @@
 
 namespace Wesnick\DrupalBootstrap\Builder\Feature;
 use Wesnick\DrupalBootstrap\Builder\Primitive\DrupalFileBuilder;
-use Wesnick\DrupalBootstrap\Builder\Primitive\MethodBuilder;
+use Wesnick\DrupalBootstrap\Builder\Primitive\FunctionBuilder;
 
 
 /**
@@ -16,7 +16,7 @@ class CtoolsContentTypeBuilder extends DrupalFileBuilder
     protected $replacements;
 
     /**
-     * @var MethodBuilder[]
+     * @var FunctionBuilder[]
      */
     protected $methods = array();
 
@@ -70,14 +70,14 @@ EOF;
 
     public function addRenderMethod()
     {
-        $method = new MethodBuilder();
+        $method = new FunctionBuilder();
         $method->setName('tdm_widgets_' . $this->name . '_render');
         $method->addArgument(array('subtype', 'string'));
         $this->methods[] = $method;
     }
 
     /**
-     * @return MethodBuilder[]
+     * @return FunctionBuilder[]
      */
     public function getMethods()
     {

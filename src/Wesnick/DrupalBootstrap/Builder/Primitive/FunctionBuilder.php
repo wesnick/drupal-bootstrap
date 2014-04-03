@@ -6,15 +6,14 @@
 namespace Wesnick\DrupalBootstrap\Builder\Primitive;
 
 /**
- * Represents a method
+ * Class FunctionBuilder
  *
- * @author Kazuyuki Hayashi <hayashi@valnur.net>
+ * @author Wesley O. Nichols <wesley.o.nichols@gmail.com>
  */
-class MethodBuilder
+class FunctionBuilder
 {
 
     private $name;
-    private $visibility;
     private $type;
     private $arguments;
     private $comments;
@@ -46,26 +45,6 @@ class MethodBuilder
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Sets visibility
-     *
-     * @param string $visibility
-     */
-    public function setVisibility($visibility)
-    {
-        $this->visibility = $visibility;
-    }
-
-    /**
-     * Gets visibility
-     *
-     * @return string
-     */
-    public function getVisibility()
-    {
-        return $this->visibility;
     }
 
     /**
@@ -138,4 +117,6 @@ class MethodBuilder
     {
         return $this->codeLines;
     }
+
+
 }

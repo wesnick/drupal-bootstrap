@@ -142,7 +142,7 @@ class InstanceBuilder
     }
 
     /**
-     * @return \Wesnick\DrupalBootstrap\Definition\WidgetBuilder
+     * @return WidgetBuilder
      */
     public function getWidget()
     {

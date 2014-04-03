@@ -48,5 +48,43 @@ class NodeTypeBuilder extends AbstractEntityTypeBuilder
         return node_type_get_types();
     }
 
+    /**
+     * @param boolean $has_title
+     *
+     * @return NodeTypeBuilder
+     */
+    public function setHasTitle($has_title)
+    {
+        $this->has_title = $has_title;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getHasTitle()
+    {
+        return $this->has_title;
+    }
+
+    /**
+     * @param string $help
+     *
+     * @return NodeTypeBuilder
+     */
+    public function setHelp($help)
+    {
+        $this->help = $help;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHelp()
+    {
+        return $this->help;
+    }
+
 
 }

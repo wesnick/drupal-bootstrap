@@ -24,7 +24,7 @@ abstract class DrupalFileBuilder
     protected $rootVariables;
 
     /**
-     * @var MethodBuilder[]
+     * @var FunctionBuilder[]
      */
     protected $methods = array();
 

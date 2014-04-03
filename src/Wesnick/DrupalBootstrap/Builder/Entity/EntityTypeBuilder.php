@@ -16,4 +16,5 @@ interface EntityTypeBuilder
     public function getBundle();
     public static function getTypes();
     public function build();
+    public function getInstances();
 }

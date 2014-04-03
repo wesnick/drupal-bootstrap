@@ -5,11 +5,15 @@ namespace Wesnick\DrupalBootstrap\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
+use Wesnick\DrupalBootstrap\Builder\Entity\AbstractEntityTypeBuilder;
 use Wesnick\DrupalBootstrap\Builder\SiteBuilder;
+use Wesnick\DrupalBootstrap\Console\DrupalBootstrapHelper;
 
 
 /**
@@ -35,16 +39,30 @@ class SiteReaderCommand extends Command
         return $this
             ->setName('dr:read')
             ->addArgument(
-                'target', InputArgument::REQUIRED,
-                '/path/to/your/drupal',
+                'src', InputArgument::REQUIRED,
+                '/path/to/your/drupal_root',
                 null
             )
-            ->addArgument(
-                'output', InputArgument::OPTIONAL,
-                'output destination for site definition yaml file',
-                null
+            ->addOption(
+                'output',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'output destination for site definition yaml file'
             )
-            ;
+            ->addOption(
+                'ver',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                "Drupal Version: 6 or 7", 7
+            )
+            ->addOption(
+                'uri',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                "Drupal Version: 6 or 7",
+                'default'
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -53,19 +71,19 @@ class SiteReaderCommand extends Command
         $this->dialog = $this->getHelper('dialog');
         $this->output = $output;
 
-        $path = $input->getArgument('target');
+        $path = $input->getArgument('src');
+
+        $version = $input->getOption('ver');
+        $uri = $input->getOption('uri');
+
+        /** @var $drupal DrupalBootstrapHelper */
         $drupal = $this->getHelper('drupal-bootstrap');
-        $drupal->boot($path);
+
+        $drupal->boot($path, $version, $uri);
         $builder = new SiteBuilder();
-        $builder->readSiteProperties();
 
-        if ($file = $input->getArgument('output')) {
-            $builder->dumpToYamlFile($file);
-        } else {
-            $output->writeln("no export so dumping to console...");
-        }
+        $builder->dumpToConsole($output, $this->getHelper('table'));
 
-        return 0;
     }
 
 
