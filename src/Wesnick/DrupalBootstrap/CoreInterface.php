@@ -46,6 +46,6 @@ interface CoreInterface {
     /**
      * @return array
      */
-    public function getPDO();
+    public function getDatabaseSettings();
 
 }
