@@ -128,7 +128,7 @@ class Drupal6 implements CoreInterface
     /**
      * @return array
      */
-    public function getPDO()
+    public function getDatabaseSettings()
     {
         throw new \Exception("Not implemented Yet");
     }
