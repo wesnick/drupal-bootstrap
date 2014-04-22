@@ -134,8 +134,8 @@ class Drupal7 implements CoreInterface
     public function getDatabaseSettings()
     {
         $conf_file = $this->drupalRoot . "/sites/default/settings.php";
-        include_once $conf_file;
         global $databases;
+        include $conf_file;
         return $databases['default'];
     }
 
