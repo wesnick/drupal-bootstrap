@@ -51,7 +51,6 @@ class Drupal7 implements CoreInterface
             throw new BootstrapException('Missing database setting, verify the database configuration in settings.php.');
         }
         drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-        chdir($current_path);
     }
 
     /**
@@ -62,7 +61,6 @@ class Drupal7 implements CoreInterface
         $current_path = getcwd();
         chdir(DRUPAL_ROOT);
         drupal_flush_all_caches();
-        chdir($current_path);
     }
 
 
