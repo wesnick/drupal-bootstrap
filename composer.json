@@ -1,6 +1,6 @@
 {
     "name": "wesnick/drupal-bootstrap",
-    "description": "Lightweight wrapper to bootstrap Drupal in OO context to make native API calls.",
+    "description": "Lightweight wrapper to bootstrap Drupal in Object-Oriented context to make native API calls.",
     "authors": [
         {
             "name": "Wesley O. Nichols",
@@ -8,19 +8,17 @@
         }
     ],
     "require": {
-        "symfony/console": "2.4.x-dev",
-        "kzykhys/php-class-generator": "dev-imports",
-        "symfony/yaml": "2.4.x-dev"
+        "symfony/console": "~2",
+        "symfony/yaml": "~2"
     },
-    "repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/wesnick/php-class-generator.git"
-    }
-],
     "autoload": {
         "psr-0": {
             "": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
         }
     }
 }

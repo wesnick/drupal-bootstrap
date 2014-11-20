@@ -16,8 +16,7 @@ $app->setHelperSet(new HelperSet(array(
     )
 ));
 $app->addCommands(array(
-    new \Wesnick\DrupalBootstrap\Command\SiteBuilderCommand(),
-    new \Wesnick\DrupalBootstrap\Command\SiteReaderCommand(),
+    new \Wesnick\DrupalBootstrap\Command\ExecutionWrapperCommand(),
 ));
 
 $app->run();
